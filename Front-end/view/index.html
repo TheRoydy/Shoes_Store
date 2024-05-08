@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="/Front-end/CSS/style.css">
 </head>
 
-<body>
-
+<body onload="listarClientes();">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2 bg-dark sidebar">
@@ -55,7 +54,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <button type="button" class="btn btn-success mt-3" id="agregar_cliente">Agregar Cliente</button>
+                        <a href="/Front-end/view/agregar_clientes.html"><button type="button" class="btn btn-success">Añadir</button></a>
                         
                     </div>
                     <div class="col-md-8 text-right">
@@ -67,7 +66,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <table class="table">
-                            <thead>
+                            <thead> 
                                 <tr>
                                     <th>ID Cliente</th>
                                     <th>Tipo Identificación</th>
@@ -82,8 +81,8 @@
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <!-- Aquí puedes agregar filas dinámicamente con los datos de los clientes -->
+                            <tbody id="cuerpoTabla">
+                                
                             </tbody>
                         </table>
                     </div>
@@ -96,10 +95,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/Front-end/js/index.js"></script>
-</body>
-
-</html>
-
 </body>
 
 </html>
