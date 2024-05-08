@@ -38,6 +38,9 @@ private String direccion;
 @Column(name="ciudad", nullable=false, length = 45)
 private String ciudad;
 
+@Column(name="correo_electronico", nullable = false, length = 100)
+private String correo_electronico;
+
 
 @Enumerated(EnumType.STRING)
 @Column(name="estado", nullable=false, length = 10)
@@ -61,7 +64,7 @@ public enum tipo_identificacion {
 
 	public clientes(String id_cliente, com.example.shoes_store.models.clientes.tipo_identificacion tipo_identificacion,
 			String identificacion, String nombre_cliente, String apellido_cliente, String telefono, String direccion,
-			String ciudad, com.example.shoes_store.models.clientes.estado estado) {
+			String ciudad, String correo_electronico, com.example.shoes_store.models.clientes.estado estado) {
 		this.id_cliente = id_cliente;
 		this.tipo_identificacion = tipo_identificacion;
 		this.identificacion = identificacion;
@@ -70,6 +73,7 @@ public enum tipo_identificacion {
 		this.telefono = telefono;
 		this.direccion = direccion;
 		this.ciudad = ciudad;
+		this.correo_electronico = correo_electronico;
 		this.estado = estado;
 	}
 
@@ -137,6 +141,14 @@ public enum tipo_identificacion {
 		this.ciudad = ciudad;
 	}
 
+	public String getCorreo_electronico() {
+		return correo_electronico;
+	}
+
+	public void setCorreo_electronico(String correo_electronico) {
+		this.correo_electronico = correo_electronico;
+	}
+
 	public estado getEstado() {
 		return estado;
 	}
@@ -144,6 +156,8 @@ public enum tipo_identificacion {
 	public void setEstado(estado estado) {
 		this.estado = estado;
 	}
+
+	
 }
 
 

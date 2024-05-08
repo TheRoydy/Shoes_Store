@@ -66,8 +66,8 @@ public class productos_Controller {
 			productos.setNombre_producto(productosUpdate.getNombre_producto());
             productos.setDescripcion(productosUpdate.getDescripcion());
             productos.setCantidad(productosUpdate.getCantidad());
-            productos.setPrecio(productosUpdate.getPrecio());
-            productos.setPorcentaje_iva(productosUpdate.getPorcentaje_iva());
+			productos.setPrecio(productosUpdate.getPrecio());
+			productos.setPorcentaje_iva(productosUpdate.getPorcentaje_iva());
 			productos.setPorcentaje_descuento(productosUpdate.getPorcentaje_descuento());
             productos.setEstado(productosUpdate.getEstado());
 			productos_Service.save(productos);

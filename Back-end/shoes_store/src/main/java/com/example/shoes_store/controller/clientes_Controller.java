@@ -70,6 +70,7 @@ public class clientes_Controller {
             clientes.setTelefono(clientesUpdate.getTelefono());
             clientes.setDireccion(clientesUpdate.getDireccion());
             clientes.setCiudad(clientesUpdate.getCiudad());
+			clientes.setCorreo_electronico(clientesUpdate.getCorreo_electronico());
             clientes.setEstado(clientesUpdate.getEstado());
 			
 			clientes_Service.save(clientes);

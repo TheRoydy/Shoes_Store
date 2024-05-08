@@ -30,10 +30,10 @@ public class productos {
     private double precio ;
 
     @Column(name = "porcentaje_iva", nullable = false, length = 45)
-    private double porcentaje_iva;
+    private int porcentaje_iva;
 
     @Column(name = "porcentaje_descuento", nullable = false, length = 45)
-    private double porcentaje_descuento = 0.0;
+    private int porcentaje_descuento;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estado", nullable = false, length = 10)
@@ -52,8 +52,7 @@ public class productos {
 
 
     public productos(String id_producto, String nombre_producto, String descripcion, int cantidad, double precio,
-            double porcentaje_iva, double porcentaje_descuento,
-            com.example.shoes_store.models.productos.estado estado) {
+            int porcentaje_iva, int porcentaje_descuento, com.example.shoes_store.models.productos.estado estado) {
         this.id_producto = id_producto;
         this.nombre_producto = nombre_producto;
         this.descripcion = descripcion;
@@ -115,22 +114,22 @@ public class productos {
     }
 
 
-    public double getPorcentaje_iva() {
+    public int getPorcentaje_iva() {
         return porcentaje_iva;
     }
 
 
-    public void setPorcentaje_iva(double porcentaje_iva) {
+    public void setPorcentaje_iva(int porcentaje_iva) {
         this.porcentaje_iva = porcentaje_iva;
     }
 
 
-    public double getPorcentaje_descuento() {
+    public int getPorcentaje_descuento() {
         return porcentaje_descuento;
     }
 
 
-    public void setPorcentaje_descuento(double porcentaje_descuento) {
+    public void setPorcentaje_descuento(int porcentaje_descuento) {
         this.porcentaje_descuento = porcentaje_descuento;
     }
 
@@ -144,8 +143,5 @@ public class productos {
         this.estado = estado;
     }
 
-    
-    
+        
 }
-
-
