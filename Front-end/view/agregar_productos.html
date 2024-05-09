@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Nuevo Cliente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1 style="margin-top: 100px">Añadir Productos</h1>
+        <h6>Todos los campos con asterisco son obligatorios</h6>
+        <br>
+        <div class="row">
+          <div class="col col-xl-6 col-12">
+            <b><label for="">Nombre del Producto *</label></b>
+            <input type="text" id="nombre_producto" class="form-control" onfocusout="validarNombre_Cliente(this);"/>
+          </div>
+          <div class="col col-xl-6 col-12">
+            <b><label for="">Descripción *</label></b>
+            <input type="text" id="descripcion" class="form-control" onfocusout="validarApellido_Cliente(this);" />
+          </div>
+          <div class="col col-xl-6 col-12">
+            <b><label for="">Cantidad *</label></b>
+            <input type="number" id="cantidad" class="form-control" onfocusout="validarTelefono(this);" />
+          </div>
+          <div class="col col-xl-6 col-12">
+            <b><label for="">Precio *</label></b>
+            <input type="number" id="precio" class="form-control" onfocusout="validarDireccion(this);" />
+          </div>
+          <div class="col col-xl-6 col-12">
+            <b><label for="">% IVA *</label></b>
+            <input type="number" id="porcentaje_iva" class="form-control" onfocusout="validarCiudad(this);" />
+          </div>
+          <div class="col col-xl-6 col-12">
+            <b><label for="">%Descuento *</label></b>
+            <input type="number" id="porcentaje_descuento" class="form-control" onfocusout="validarCorreo_Electronico(this);" />
+          </div>
+          <div class="col col-xl-6 col-12">
+            <b><label for="">Estado *</label></b>
+            <select name="" id="estado" class="form-select" onfocusout="validarEstado(this);">
+                <option value="" selected disabled style="font-weight: bold;">Selecciona una opción</option>
+                <option value="ACTIVO" style="color:green; font-weight: bold;">ACTIVO</option>
+                <option value="INACTIVO" style="color: red; font-weight: bold;">INACTIVO</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <button class="btn btn-success" onclick="registrarProductos();">
+          Agregar Producto
+        </button>
+        <a href="/Front-end/view/productos.html"><button class="btn btn-danger">Cerrar</button></a>
+      </div>
+    </body>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/Front-end/js/productos.js"></script>
+</body>
+</html>
