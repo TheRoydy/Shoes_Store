@@ -66,6 +66,7 @@ function listarProductos() {
         trResgistro.appendChild(celdaPrecio);
         trResgistro.appendChild(celdaIVA);
         trResgistro.appendChild(celdaDescuento);
+        trResgistro.appendChild(celdaEstado);
         trResgistro.appendChild(celdaAcciones);
 
 
@@ -175,7 +176,7 @@ function registrarProductos() {
           text: "Se guardó correctamente",
           icon: "success"
         });
-        limpiarCliente();
+        limpiarProducto();
       },
       error: function (error) {
         Swal.fire("Error", "Error al guardar, " + error.responseText, "error");
