@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.example.shoes_store.models.clientes;
 
+@Repository
 public interface I_Clientes extends CrudRepository<clientes, String> {
     
     @Query("SELECT c FROM clientes c WHERE "
