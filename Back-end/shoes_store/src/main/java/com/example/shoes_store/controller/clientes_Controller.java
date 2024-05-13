@@ -68,7 +68,7 @@ public class clientes_Controller {
 
             return new ResponseEntity<>("El correo es un campo obligatorio", HttpStatus.BAD_REQUEST);
         }
-        if (clientes.getEstado().equals("")) {
+		if (clientes.getEstado().equals("")) {
 
             return new ResponseEntity<>("El estado es un campo obligatorio", HttpStatus.BAD_REQUEST);
         }

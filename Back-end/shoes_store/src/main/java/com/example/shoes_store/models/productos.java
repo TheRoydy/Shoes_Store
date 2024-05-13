@@ -35,24 +35,16 @@ public class productos {
     @Column(name = "porcentaje_descuento", nullable = false, length = 45)
     private int porcentaje_descuento;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "estado", nullable = false, length = 10)
-    private estado estado;
     
-
-    public enum estado {
-        ACTIVO,
-        INACTIVO,
-
-    }
-
+    @Column(name = "estado", nullable = false, length = 10)
+    private String estado;
 
     public productos() {
     }
 
 
     public productos(String id_producto, String nombre_producto, String descripcion, int cantidad, double precio,
-            int porcentaje_iva, int porcentaje_descuento, com.example.shoes_store.models.productos.estado estado) {
+            int porcentaje_iva, int porcentaje_descuento, String estado) {
         this.id_producto = id_producto;
         this.nombre_producto = nombre_producto;
         this.descripcion = descripcion;
@@ -134,12 +126,12 @@ public class productos {
     }
 
 
-    public estado getEstado() {
+    public String getEstado() {
         return estado;
     }
 
 
-    public void setEstado(estado estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

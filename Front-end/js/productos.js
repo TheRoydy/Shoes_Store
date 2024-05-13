@@ -206,201 +206,172 @@ function registrarProductos() {
     });
   }
 
-  function validarCampos() {
-    var identificacion = document.getElementById("identificacion");
-    return validarIdentificacion(identificacion);
-  }
-  function validarIdentificacion(cuadroNumero) {
-    /*
-    numero documento 
-    min=5
-    max=11
-    numero entero
-  
-    si cumple, se cambia color a verde
-    si no, se cambia a rojo
-    */
-    var valor = cuadroNumero.value;
-    var valido = true;
-    if (valor.length < 5 || valor.length > 11) {
-      valido = false
-    }
+ 
+}
 
-    if (valido) {
-      //cuadro de texto cumple
-      cuadroNumero.className = "form-control is-valid";
-    } else {
-      //cuadro de texto no cumple
-      cuadroNumero.className = "form-control is-invalid";
-    }
-    return valido;
 
+//validarNombre
+function validarCampos() {
+  var nombre_producto = document.getElementById("nombre_producto");
+  return validarNombre_Producto(nombre_cliente);
+}
+function validarNombre_Producto(cuadroNumero) {
+
+  var valor = cuadroNumero.value;
+  var valido = true;
+  if (valor.length < 1 || valor.length > 20) {
+    valido = false
   }
 
-  //validarNombre
-  function validarCampos() {
-    var nombre_cliente = document.getElementById("nombre_cliente");
-    return validarNombre_Cliente(nombre_cliente);
+  if (valido) {
+    //cuadro de texto cumple
+    cuadroNumero.className = "form-control is-valid";
+  } else {
+    //cuadro de texto no cumple
+    cuadroNumero.className = "form-control is-invalid";
   }
-  function validarNombre_Cliente(cuadroNumero) {
+  return valido;
+}
+//ValidadDescripcion
+function validarCampos() {
+  var descripcion = document.getElementById("descripcion");
+  return validarDescripcion(descripcion);
+}
+function validarDescripcion(cuadroNumero) {
 
-    var valor = cuadroNumero.value;
-    var valido = true;
-    if (valor.length < 1 || valor.length > 20) {
-      valido = false
-    }
-
-    if (valido) {
-      //cuadro de texto cumple
-      cuadroNumero.className = "form-control is-valid";
-    } else {
-      //cuadro de texto no cumple
-      cuadroNumero.className = "form-control is-invalid";
-    }
-    return valido;
-  }
-  //ValidadApellido
-  function validarCampos() {
-    var apellido_cliente = document.getElementById("apellido_cliente");
-    return validarApellido_Cliente(apellido_cliente);
-  }
-  function validarApellido_Cliente(cuadroNumero) {
-
-    var valor = cuadroNumero.value;
-    var valido = true;
-    if (valor.length < 1 || valor.length > 11) {
-      valido = false
-    }
-
-    if (valido) {
-      //cuadro de texto cumple
-      cuadroNumero.className = "form-control is-valid";
-    } else {
-      //cuadro de texto no cumple
-      cuadroNumero.className = "form-control is-invalid";
-    }
-    return valido;
-
+  var valor = cuadroNumero.value;
+  var valido = true;
+  if (valor.length < 1 || valor.length > 11) {
+    valido = false
   }
 
-  //ValidadTelefono
-  function validarCampos() {
-    var telefono = document.getElementById("telefono");
-    return validarTelefono(telefono);
+  if (valido) {
+    //cuadro de texto cumple
+    cuadroNumero.className = "form-control is-valid";
+  } else {
+    //cuadro de texto no cumple
+    cuadroNumero.className = "form-control is-invalid";
   }
-  function validarTelefono(cuadroNumero) {
-
-    var valor = cuadroNumero.value;
-    var valido = true;
-    if (valor.length < 10 || valor.length > 15) {
-      valido = false
-    }
-
-    if (valido) {
-      //cuadro de texto cumple
-      cuadroNumero.className = "form-control is-valid";
-    } else {
-      //cuadro de texto no cumple
-      cuadroNumero.className = "form-control is-invalid";
-    }
-    return valido;
-
-  }
-
-  function validarCampos() {
-    var direccion = document.getElementById("direccion");
-    return validarDireccion(direccion);
-  }
-  function validarDireccion(cuadroNumero) {
-
-    var valor = cuadroNumero.value;
-    var valido = true;
-    if (valor.length < 10 || valor.length > 200) {
-      valido = false
-    }
-
-    if (valido) {
-      //cuadro de texto cumple
-      cuadroNumero.className = "form-control is-valid";
-    } else {
-      //cuadro de texto no cumple
-      cuadroNumero.className = "form-control is-invalid";
-    }
-    return valido;
-
-  }
-
-  function validarCampos() {
-    var ciudad = document.getElementById("ciudad");
-    return validarCiudad(ciudad);
-  }
-  function validarCiudad(cuadroNumero) {
-
-    var valor = cuadroNumero.value;
-    var valido = true;
-    if (valor.length < 10 || valor.length > 200) {
-      valido = false
-    }
-
-    if (valido) {
-      //cuadro de texto cumple
-      cuadroNumero.className = "form-control is-valid";
-    } else {
-      //cuadro de texto no cumple
-      cuadroNumero.className = "form-control is-invalid";
-    }
-    return valido;
-
-  }
-
-  //ValidadCorreo
-  function validarCampos() {
-    var correo_electronico = document.getElementById("correo_electronico");
-    return validarCorreo_Electronico(correo_electronico);
-  }
-  function validarCorreo_Electronico(cuadroNumero) {
-
-    var valor = cuadroNumero.value;
-    var valido = true;
-    if (valor.length < 5 || valor.length > 100) {
-      valido = false
-    }
-
-    if (valido) {
-      //cuadro de texto cumple
-      cuadroNumero.className = "form-control is-valid";
-    } else {
-      //cuadro de texto no cumple
-      cuadroNumero.className = "form-control is-invalid";
-    }
-    return valido;
-
-  }
-  //ValidadDireccion
-
-
-  function validarCampos() {
-    var estado = document.getElementById("estado");
-    return validarEstado(estado);
-  }
-  function validarEstado(cuadroNumero) {
-
-    var valor = cuadroNumero.value;
-    var valido = true;
-    if (valor.length < 1 || valor.length > 1) {
-      valido = false
-    }
-
-    if (valido) {
-      //cuadro de texto cumple
-      cuadroNumero.className = "form-control is-valid";
-    } else {
-      //cuadro de texto no cumple
-      cuadroNumero.className = "form-control is-invalid";
-    }
-    return valido;
-
-  }
-
+  return valido;
 
 }
+
+//ValidadCantidad
+function validarCampos() {
+  var cantidad = document.getElementById("cantidad");
+  return validarCantidad(cantidad);
+}
+function validarCantidad(cuadroNumero) {
+
+  var valor = cuadroNumero.value;
+  var valido = true;
+  if (valor.length < 1 || valor.length > 15) {
+    valido = false
+  }
+
+  if (valido) {
+    //cuadro de texto cumple
+    cuadroNumero.className = "form-control is-valid";
+  } else {
+    //cuadro de texto no cumple
+    cuadroNumero.className = "form-control is-invalid";
+  }
+  return valido;
+
+}
+
+//ValidadPrecio
+function validarCampos() {
+  var precio = document.getElementById("precio");
+  return validarPrecio(precio);
+}
+function validarPrecio(cuadroNumero) {
+
+  var valor = cuadroNumero.value;
+  var valido = true;
+  if (valor.length < 1 || valor.length > 999999999) {
+    valido = false
+  }
+
+  if (valido) {
+    //cuadro de texto cumple
+    cuadroNumero.className = "form-control is-valid";
+  } else {
+    //cuadro de texto no cumple
+    cuadroNumero.className = "form-control is-invalid";
+  }
+  return valido;
+
+}
+
+//ValidadIVA
+function validarCampos() {
+  var porcentaje_iva = document.getElementById("porcentaje_iva");
+  return validarIVA(porcentaje_iva);
+}
+function validarIVA(cuadroNumero) {
+
+  var valor = cuadroNumero.value;
+  var valido = true;
+  if (valor.length < 1 || valor.length > 100) {
+    valido = false
+  }
+
+  if (valido) {
+    //cuadro de texto cumple
+    cuadroNumero.className = "form-control is-valid";
+  } else {
+    //cuadro de texto no cumple
+    cuadroNumero.className = "form-control is-invalid";
+  }
+  return valido;
+
+}
+
+//ValidadDescuento
+function validarCampos() {
+  var porcentaje_descuento = document.getElementById("porcentaje_descuento");
+  return validarDescuento(porcentaje_descuento);
+}
+function validarDescuento(cuadroNumero) {
+
+  var valor = cuadroNumero.value;
+  var valido = true;
+  if (valor.length < 1 || valor.length > 100) {
+    valido = false
+  }
+
+  if (valido) {
+    //cuadro de texto cumple
+    cuadroNumero.className = "form-control is-valid";
+  } else {
+    //cuadro de texto no cumple
+    cuadroNumero.className = "form-control is-invalid";
+  }
+  return valido;
+
+}
+
+function validarCampos() {
+  var estado = document.getElementById("estado");
+  return validarEstado(estado);
+}
+function validarEstado(cuadroNumero) {
+
+  var valor = cuadroNumero.value;
+  var valido = true;
+  if (valor.length < 1 || valor.length > 11) {
+    valido = false
+  }
+
+  if (valido) {
+    //cuadro de texto cumple
+    cuadroNumero.className = "form-control is-valid";
+  } else {
+    //cuadro de texto no cumple
+    cuadroNumero.className = "form-control is-invalid";
+  }
+  return valido;
+
+}
+

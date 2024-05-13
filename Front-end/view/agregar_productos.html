@@ -16,34 +16,34 @@
         <div class="row">
           <div class="col col-xl-6 col-12">
             <b><label for="">Nombre del Producto *</label></b>
-            <input type="text" id="nombre_producto" class="form-control" onfocusout="validarNombre_Cliente(this);"/>
+            <input type="text" id="nombre_producto" class="form-control" onfocusout="validarNombre_Producto(this);"/>
           </div>
           <div class="col col-xl-6 col-12">
             <b><label for="">Descripción *</label></b>
-            <input type="text" id="descripcion" class="form-control" onfocusout="validarApellido_Cliente(this);" />
+            <input type="text" id="descripcion" class="form-control" onfocusout="validarDescripcion(this);" />
           </div>
           <div class="col col-xl-6 col-12">
             <b><label for="">Cantidad *</label></b>
-            <input type="number" id="cantidad" class="form-control" onfocusout="validarTelefono(this);" />
+            <input type="number" id="cantidad" class="form-control" onfocusout="validarCantidad(this);" />
           </div>
           <div class="col col-xl-6 col-12">
             <b><label for="">Precio *</label></b>
-            <input type="number" id="precio" class="form-control" onfocusout="validarDireccion(this);" />
+            <input type="number" id="precio" class="form-control" onfocusout="validarPrecio(this);" />
           </div>
           <div class="col col-xl-6 col-12">
             <b><label for="">% IVA *</label></b>
-            <input type="number" id="porcentaje_iva" class="form-control" onfocusout="validarCiudad(this);" />
+            <input type="number" id="porcentaje_iva" class="form-control" onfocusout="validarIVA(this);" />
           </div>
           <div class="col col-xl-6 col-12">
             <b><label for="">% Descuento *</label></b>
-            <input type="number" id="porcentaje_descuento" class="form-control" onfocusout="validarCorreo_Electronico(this);" />
+            <input type="number" id="porcentaje_descuento" class="form-control" onfocusout="validarDescuento(this);" />
           </div>
           <div class="col col-xl-6 col-12">
             <b><label for="">Estado *</label></b>
             <select name="" id="estado" class="form-select" onfocusout="validarEstado(this);">
                 <option value="" selected disabled style="font-weight: bold;">Selecciona una opción</option>
-                <option value="ACTIVO" style="color:green; font-weight: bold;">ACTIVO</option>
-                <option value="INACTIVO" style="color: red; font-weight: bold;">INACTIVO</option>
+                <option value="ACTIVO">ACTIVO</option>
+                <option value="INACTIVO">INACTIVO</option>
             </select>
           </div>
         </div>
