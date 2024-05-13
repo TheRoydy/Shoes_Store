@@ -53,8 +53,7 @@ function listarClientes() {
         botonEliminar.value = result[i]["id_cliente"];
         botonEliminar.innerHTML = "Eliminar";
         botonEliminar.onclick = function (e) {
-          $('#exampleModal').modal('show');
-          consultarClienteID(this.value);
+          eliminarCliente(this.value);
         }
         botonEliminar.className = "btn btn-danger eliminar";
 
@@ -101,27 +100,88 @@ function listarClientes() {
       alert("Error en la petición " + error);
     }
   });
-
-  function consultarClienteID(id) {
-    $.ajax({
-      url: url + id,
-      type: "GET",
-      success: function (result) {
-        document.getElementById("id_cliente").value = result["id_cliente"];
-        document.getElementById("tipo_identificacion").value = result["tipo_identificacion"];
-        document.getElementById("identificacion").value = result["identificacion"];
-        document.getElementById("nombre").value = result["nombre"];
-        document.getElementById("apellido").value = result["apellido"];
-        document.getElementById("telefono").value = result["telefono"];
-        document.getElementById("direccion").value = result["direccion"];
-        document.getElementById("cuidad").value = result["cuidad"];
-        document.getElementById("correo_electronico").value = result["correo_electronico"];
-        document.getElementById("estado").value = result["estado"];
-        document.getElementById("acciones").value = result["acciones"];
-      }
-    });
-  }
 }
+
+function consultarClienteID(id) {
+  $.ajax({
+    url: url + id,
+    type: "GET",
+    success: function (result) {
+      document.getElementById("id_cliente").value = result["id_cliente"];
+      document.getElementById("tipo_identificacion").value = result["tipo_identificacion"];
+      document.getElementById("identificacion").value = result["identificacion"];
+      document.getElementById("nombre").value = result["nombre"];
+      document.getElementById("apellido").value = result["apellido"];
+      document.getElementById("telefono").value = result["telefono"];
+      document.getElementById("direccion").value = result["direccion"];
+      document.getElementById("cuidad").value = result["cuidad"];
+      document.getElementById("correo_electronico").value = result["correo_electronico"];
+      document.getElementById("estado").value = result["estado"];
+      document.getElementById("acciones").value = result["acciones"];
+    }
+  });
+}
+
+function eliminarCliente(id) {
+  Swal.fire({
+    title: "¿Estás seguro?",
+    text: "¡Seguro que quieres eliminar esto, una vez eliminado no se podra recuperar este registro!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí, eliminarlo!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: url + id,
+        type: "DELETE",
+        success: function (result) {
+          Swal.fire(
+            "¡Eliminado!",
+            "El cliente ha sido eliminado correctamente.",
+            "success"
+          );
+          listarClientes(); // Recargar la lista después de eliminar
+        },
+        error: function (error) {
+          Swal.fire("Error", "Error al eliminar el cliente, " + error.responseText, "error");
+        }
+      });
+    }
+  });
+}
+
+function cambiarEstadoCliente() {
+  var idCliente = document.getElementById("id_cliente").value;
+  var nuevoEstado = document.getElementById("estadoCliente").value;
+
+  var formData = {
+      "estado": nuevoEstado
+  };
+
+  $.ajax({
+      url: url + idCliente,
+      type: "PUT",
+      data: formData,
+      success: function (result) {
+          Swal.fire({
+              title: "¡Estado cambiado!",
+              text: "El estado del cliente se ha actualizado correctamente.",
+              icon: "success"
+          });
+          $('#cambiarEstadoModal').modal('hide'); // Cerrar el modal correcto
+          listarClientes(); // Recargar la lista después de cambiar el estado
+      },
+      error: function (error) {
+          Swal.fire("Error", "Error al cambiar el estado del cliente, " + error.responseText, "error");
+      },
+  });
+}
+
+
+
+
 
 function validarCampos() {
   var identificacion = document.getElementById("identificacion").value;
@@ -422,4 +482,25 @@ function validarEstado(cuadroNumero) {
   }
   return valido;
 
+}
+
+function limpiarFormulario() {
+  document.getElementById("tipo_identificacion").className = "form-control";
+  document.getElementById("identificacion").className = "form-control";
+  document.getElementById("nombre_cliente").className = "form-control";
+  document.getElementById("apellido_cliente").className = "form-control";
+  document.getElementById("telefono").className = "form-control";
+  document.getElementById("direccion").className = "form-control";
+  document.getElementById("ciudad").className = "form-control";
+  document.getElementById("correo_electronico").className = "form-control";
+  document.getElementById("estado").className = "form-control";
+  document.getElementById("tipo_identificacion").value = "";
+  document.getElementById("identificacion").value = "";
+  document.getElementById("nombre_cliente").value = "";
+  document.getElementById("apellido_cliente").value = "";
+  document.getElementById("telefono").value = "";
+  document.getElementById("direccion").value = "";
+  document.getElementById("ciudad").value = "";
+  document.getElementById("correo_electronico").value = "";
+  document.getElementById("estado").value = "";
 }

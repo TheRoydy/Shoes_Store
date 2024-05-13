@@ -12,16 +12,11 @@ function listarProductos() {
     url: urlLocal,
     type: "GET",
     success: function (result) {
-      //success: funcion que se ejecuta
-      //cuando la peticion tiene exito
       console.log(result);
 
       var cuerpoTabla = document.getElementById("cuerpoTabla");
-      //Se limpia el cuepro de la tabla
       cuerpoTabla.innerHTML = "";
-      //se hace un ciclo que recorra l arreglo con los datos
       for (var i = 0; i < result.length; i++) {
-        //UNA ETIQUETA tr por cada registro
         var trResgistro = document.createElement("tr");
 
         var celdaID_Producto = document.createElement("td");
@@ -35,11 +30,7 @@ function listarProductos() {
         let celdaAcciones = document.createElement("td")
         celdaAcciones.style.textAlign = "center";
 
-        var headerAcciones = document.getElementById("headerAcciones"); // Suponiendo que tengas un ID para el encabezado de la columna "Acciones"
-        headerAcciones.style.textAlign = "center";
-
-
-        let botonEditarProducto = document.createElement("button");
+        var botonEditarProducto = document.createElement("button");
         botonEditarProducto.value = result[i]["id_producto"];
         botonEditarProducto.innerHTML = "Editar";
         botonEditarProducto.onclick = function (e) {
@@ -49,16 +40,15 @@ function listarProductos() {
         botonEditarProducto.className = "btn btn-warning editar_producto";
 
         let botonEliminar = document.createElement("button");
-        botonEliminar.value = result[i]["id_cliente"];
+        botonEliminar.value = result[i]["id_producto"];
         botonEliminar.innerHTML = "Eliminar";
         botonEliminar.onclick = function (e) {
-          $('#exampleModal').modal('show');
-          consultarProductoID(this.value);
+          eliminarProducto(this.value);
         }
         botonEliminar.className = "btn btn-danger eliminar";
 
-        let botonCambiar_estado = document.createElement("button");
-        botonCambiar_estado.value = result[i]["id_cliente"];
+        var botonCambiar_estado = document.createElement("button");
+        botonCambiar_estado.value = result[i]["id_producto"];
         botonCambiar_estado.innerHTML = "Estado";
         botonCambiar_estado.onclick = function (e) {
           $('#exampleModal').modal('show');
@@ -75,11 +65,9 @@ function listarProductos() {
         celdaDescuento.innerText = result[i]["porcentaje_descuento"];
         celdaEstado.innerText = result[i]["estado"];
 
-        // Asignación de los botones a la celda de "Acciones"
         celdaAcciones.appendChild(botonEditarProducto);
         celdaAcciones.appendChild(botonEliminar);
         celdaAcciones.appendChild(botonCambiar_estado);
-
 
         trResgistro.appendChild(celdaID_Producto);
         trResgistro.appendChild(celdaNombre_Producto);
@@ -89,66 +77,67 @@ function listarProductos() {
         trResgistro.appendChild(celdaIVA);
         trResgistro.appendChild(celdaDescuento);
         trResgistro.appendChild(celdaEstado);
-        trResgistro.appendChild(celdaAcciones); // Agregar la celda de "Acciones" a la fila
+        trResgistro.appendChild(celdaAcciones);
 
         cuerpoTabla.appendChild(trResgistro);
-
-        //creamos un td por cada campo de resgistro
-
       }
     },
     error: function (error) {
-      /*
-      ERROR: funcion que se ejecuta cuando la peticion tiene un error
-      */
       alert("Error en la petición " + error);
     }
-  })
-
-  function consultarProductoID(id) {
-    //alert(id);
-    $.ajax({
-      url: url + id,
-      type: "GET",
-      success: function (result) {
-        document.getElementById("id_producto").value = result["id_producto"];
-        document.getElementById("nombre_producto").value = result["nombre_producto"];
-        document.getElementById("descripcion").value = result["descripcion"];
-        document.getElementById("cantidad").value = result["cantidad"];
-        document.getElementById("precio").value = result["precio"];
-        document.getElementById("porcentaje_iva").value = result["porcentaje_iva"];
-        document.getElementById("porcentaje_descuento").value = result["porcentaje_descuento"];
-        document.getElementById("estado").value = result["estado"];
-        document.getElementById("acciones").value = result["acciones"];
-
-      }
-    });
-  }
-
+  });
 }
 
-/*function validarCampos() {
-  // Obtener los valores de los campos
-  var tipo_identificacion = document.getElementById("tipo_identificacion").value;
-  var identificacion = document.getElementById("identificacion").value;
-  var nombre_cliente = document.getElementById("nombre_cliente").value;
-  var apellido_cliente = document.getElementById("apellido_cliente").value;
-  var telefono = document.getElementById("telefono").value;
-  var direccion = document.getElementById("direccion").value;
-  var ciudad = document.getElementById("ciudad").value;
-  var correo_electronico = document.getElementById("correo_electronico").value;
-  var estado = document.getElementById("estado").value;
+function consultarProductoID(id) {
+  $.ajax({
+    url: url + id,
+    type: "GET",
+    success: function (result) {
+      document.getElementById("id_producto").value = result["id_producto"];
+      document.getElementById("nombre_producto").value = result["nombre_producto"];
+      document.getElementById("descripcion").value = result["descripcion"];
+      document.getElementById("cantidad").value = result["cantidad"];
+      document.getElementById("precio").value = result["precio"];
+      document.getElementById("porcentaje_iva").value = result["porcentaje_iva"];
+      document.getElementById("porcentaje_descuento").value = result["porcentaje_descuento"];
+      document.getElementById("estado").value = result["estado"];
+      document.getElementById("acciones").value = result["acciones"];
 
-  // Verificar si algún campo está vacío
-  if (tipo_identificacion === '' || identificacion === '' || nombre_cliente === '' || apellido_cliente === '' || telefono === '' || direccion === '' || ciudad === ''|| correo_electronico === ''  || estado === '') {
-    return false; // Al menos un campo está vacío
-  } else {
-    return true; // Todos los campos están llenos
-  }
-}*/
+    }
+  });
+}
+
+function eliminarProducto(id) {
+  Swal.fire({
+    title: "¿Estás seguro?",
+    text: "¡Seguro que quieres eliminar esto, una vez eliminado no se podrá recuperar este registro!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí, eliminarlo!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: url + id,
+        type: "DELETE",
+        success: function (result) {
+          Swal.fire(
+            "¡Eliminado!",
+            "El producto ha sido eliminado correctamente.",
+            "success"
+          );
+          listarProductos(); // Recargar la lista después de eliminar
+        },
+        error: function (error) {
+          Swal.fire("Error", "Error al eliminar el producto, " + error.responseText, "error");
+        }
+      });
+    }
+  });
+}
 
 function registrarProductos() {
-
   let formData = {
     "nombre_producto": document.getElementById("nombre_producto").value,
     "descripcion": document.getElementById("descripcion").value,
@@ -157,7 +146,6 @@ function registrarProductos() {
     "porcentaje_iva": document.getElementById("porcentaje_iva").value,
     "porcentaje_descuento": document.getElementById("porcentaje_descuento").value,
     "estado": document.getElementById("estado").value
-
   };
 
   let camposValidos = true;
@@ -169,7 +157,6 @@ function registrarProductos() {
     "porcentaje_iva",
     "porcentaje_descuento",
     "estado"
-
   ];
 
   camposRequeridos.forEach(function (campo) {
@@ -205,18 +192,14 @@ function registrarProductos() {
       icon: "error"
     });
   }
-
- 
 }
 
-
-//validarNombre
 function validarCampos() {
   var nombre_producto = document.getElementById("nombre_producto");
   return validarNombre_Producto(nombre_cliente);
 }
-function validarNombre_Producto(cuadroNumero) {
 
+function validarNombre_Producto(cuadroNumero) {
   var valor = cuadroNumero.value;
   var valido = true;
   if (valor.length < 1 || valor.length > 20) {
@@ -232,13 +215,13 @@ function validarNombre_Producto(cuadroNumero) {
   }
   return valido;
 }
-//ValidadDescripcion
+
 function validarCampos() {
   var descripcion = document.getElementById("descripcion");
   return validarDescripcion(descripcion);
 }
-function validarDescripcion(cuadroNumero) {
 
+function validarDescripcion(cuadroNumero) {
   var valor = cuadroNumero.value;
   var valido = true;
   if (valor.length < 1 || valor.length > 11) {
@@ -256,13 +239,12 @@ function validarDescripcion(cuadroNumero) {
 
 }
 
-//ValidadCantidad
 function validarCampos() {
   var cantidad = document.getElementById("cantidad");
   return validarCantidad(cantidad);
 }
-function validarCantidad(cuadroNumero) {
 
+function validarCantidad(cuadroNumero) {
   var valor = cuadroNumero.value;
   var valido = true;
   if (valor.length < 1 || valor.length > 15) {
@@ -280,13 +262,12 @@ function validarCantidad(cuadroNumero) {
 
 }
 
-//ValidadPrecio
 function validarCampos() {
   var precio = document.getElementById("precio");
   return validarPrecio(precio);
 }
-function validarPrecio(cuadroNumero) {
 
+function validarPrecio(cuadroNumero) {
   var valor = cuadroNumero.value;
   var valido = true;
   if (valor.length < 1 || valor.length > 999999999) {
@@ -304,13 +285,12 @@ function validarPrecio(cuadroNumero) {
 
 }
 
-//ValidadIVA
 function validarCampos() {
   var porcentaje_iva = document.getElementById("porcentaje_iva");
   return validarIVA(porcentaje_iva);
 }
-function validarIVA(cuadroNumero) {
 
+function validarIVA(cuadroNumero) {
   var valor = cuadroNumero.value;
   var valido = true;
   if (valor.length < 1 || valor.length > 100) {
@@ -328,13 +308,12 @@ function validarIVA(cuadroNumero) {
 
 }
 
-//ValidadDescuento
 function validarCampos() {
   var porcentaje_descuento = document.getElementById("porcentaje_descuento");
   return validarDescuento(porcentaje_descuento);
 }
-function validarDescuento(cuadroNumero) {
 
+function validarDescuento(cuadroNumero) {
   var valor = cuadroNumero.value;
   var valido = true;
   if (valor.length < 1 || valor.length > 100) {
@@ -356,8 +335,8 @@ function validarCampos() {
   var estado = document.getElementById("estado");
   return validarEstado(estado);
 }
-function validarEstado(cuadroNumero) {
 
+function validarEstado(cuadroNumero) {
   var valor = cuadroNumero.value;
   var valido = true;
   if (valor.length < 1 || valor.length > 11) {
@@ -375,3 +354,19 @@ function validarEstado(cuadroNumero) {
 
 }
 
+function limpiarFormulario() {
+  document.getElementById("nombre_producto").className = "form-control";
+  document.getElementById("descripcion").className = "form-control";
+  document.getElementById("cantidad").className = "form-control";
+  document.getElementById("precio").className = "form-control";
+  document.getElementById("porcentaje_iva").className = "form-control";
+  document.getElementById("porcentaje_descuento").className = "form-control";
+  document.getElementById("estado").className = "form-select";
+  document.getElementById("nombre_producto").value = "";
+  document.getElementById("descripcion").value = "";
+  document.getElementById("cantidad").value = "";
+  document.getElementById("precio").value = "";
+  document.getElementById("porcentaje_iva").value = "";
+  document.getElementById("porcentaje_descuento").value = "";
+  document.getElementById("estado").value = "";
+}
