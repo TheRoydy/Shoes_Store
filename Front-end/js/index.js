@@ -37,7 +37,7 @@ function listarClientes() {
         let celdaAcciones = document.createElement("td")
         celdaAcciones.style.textAlign = "center";
 
-        var headerAcciones = document.getElementById("headerAcciones"); // Suponiendo que tengas un ID para el encabezado de la columna "Acciones"
+        var headerAcciones = document.getElementById("headerAcciones"); 
         headerAcciones.style.textAlign = "center";
 
         let botonEditarCliente = document.createElement("button");
@@ -170,7 +170,7 @@ function cambiarEstadoCliente() {
               text: "El estado del cliente se ha actualizado correctamente.",
               icon: "success"
           });
-          $('#cambiarEstadoModal').modal('hide'); // Cerrar el modal correcto
+          $('#cambiarEstadoModal').modal('hide');
           listarClientes(); // Recargar la lista después de cambiar el estado
       },
       error: function (error) {
@@ -178,10 +178,6 @@ function cambiarEstadoCliente() {
       },
   });
 }
-
-
-
-
 
 function validarCampos() {
   var identificacion = document.getElementById("identificacion").value;
