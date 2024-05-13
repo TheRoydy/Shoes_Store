@@ -33,19 +33,38 @@ function listarProductos() {
         let celdaDescuento = document.createElement("td")
         let celdaEstado = document.createElement("td")
         let celdaAcciones = document.createElement("td")
+        celdaAcciones.style.textAlign = "center";
+
+        var headerAcciones = document.getElementById("headerAcciones"); // Suponiendo que tengas un ID para el encabezado de la columna "Acciones"
+        headerAcciones.style.textAlign = "center";
 
 
-        let celdaOpcion = document.createElement("td");
         let botonEditarProducto = document.createElement("button");
         botonEditarProducto.value = result[i]["id_producto"];
         botonEditarProducto.innerHTML = "Editar";
-
-
         botonEditarProducto.onclick = function (e) {
           $('#exampleModal').modal('show');
           consultarProductoID(this.value);
         }
-        botonEditarProducto.className = "btn btn-warning editar-cliente";
+        botonEditarProducto.className = "btn btn-warning editar_producto";
+
+        let botonEliminar = document.createElement("button");
+        botonEliminar.value = result[i]["id_cliente"];
+        botonEliminar.innerHTML = "Eliminar";
+        botonEliminar.onclick = function (e) {
+          $('#exampleModal').modal('show');
+          consultarProductoID(this.value);
+        }
+        botonEliminar.className = "btn btn-danger eliminar";
+
+        let botonCambiar_estado = document.createElement("button");
+        botonCambiar_estado.value = result[i]["id_cliente"];
+        botonCambiar_estado.innerHTML = "Estado";
+        botonCambiar_estado.onclick = function (e) {
+          $('#exampleModal').modal('show');
+          consultarClienteID(this.value);
+        }
+        botonCambiar_estado.className = "btn btn-primary cambiar_estado";
 
         celdaID_Producto.innerText = result[i]["id_producto"];
         celdaNombre_Producto.innerText = result[i]["nombre_producto"];
@@ -55,8 +74,11 @@ function listarProductos() {
         celdaIVA.innerText = result[i]["porcentaje_iva"];
         celdaDescuento.innerText = result[i]["porcentaje_descuento"];
         celdaEstado.innerText = result[i]["estado"];
-        celdaAcciones.innerText = result[i]["acciones"];
 
+        // Asignación de los botones a la celda de "Acciones"
+        celdaAcciones.appendChild(botonEditarProducto);
+        celdaAcciones.appendChild(botonEliminar);
+        celdaAcciones.appendChild(botonCambiar_estado);
 
 
         trResgistro.appendChild(celdaID_Producto);
@@ -67,16 +89,9 @@ function listarProductos() {
         trResgistro.appendChild(celdaIVA);
         trResgistro.appendChild(celdaDescuento);
         trResgistro.appendChild(celdaEstado);
-        trResgistro.appendChild(celdaAcciones);
-
-
-
-        celdaOpcion.appendChild(botonEditarProducto);
-        trResgistro.appendChild(celdaOpcion)
-
+        trResgistro.appendChild(celdaAcciones); // Agregar la celda de "Acciones" a la fila
 
         cuerpoTabla.appendChild(trResgistro);
-
 
         //creamos un td por cada campo de resgistro
 

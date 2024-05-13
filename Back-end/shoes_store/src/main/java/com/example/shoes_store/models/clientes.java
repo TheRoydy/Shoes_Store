@@ -157,6 +157,12 @@ public enum tipo_identificacion {
 		this.estado = estado;
 	}
 
+	public boolean contieneCamposVacios() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 	
 }
 

@@ -35,19 +35,37 @@ function listarClientes() {
         let celdaCorreo_Electronico = document.createElement("td")
         let celdaEstado = document.createElement("td")
         let celdaAcciones = document.createElement("td")
+        celdaAcciones.style.textAlign = "center";
 
+        var headerAcciones = document.getElementById("headerAcciones"); // Suponiendo que tengas un ID para el encabezado de la columna "Acciones"
+        headerAcciones.style.textAlign = "center";
 
-        let celdaOpcion = document.createElement("td");
         let botonEditarCliente = document.createElement("button");
         botonEditarCliente.value = result[i]["id_cliente"];
         botonEditarCliente.innerHTML = "Editar";
-
-
         botonEditarCliente.onclick = function (e) {
           $('#exampleModal').modal('show');
           consultarClienteID(this.value);
         }
-        botonEditarCliente.className = "btn btn-warning editar-cliente";
+        botonEditarCliente.className = "btn btn-warning editar_cliente";
+
+        let botonEliminar = document.createElement("button");
+        botonEliminar.value = result[i]["id_cliente"];
+        botonEliminar.innerHTML = "Eliminar";
+        botonEliminar.onclick = function (e) {
+          $('#exampleModal').modal('show');
+          consultarClienteID(this.value);
+        }
+        botonEliminar.className = "btn btn-danger eliminar";
+
+        let botonCambiar_estado = document.createElement("button");
+        botonCambiar_estado.value = result[i]["id_cliente"];
+        botonCambiar_estado.innerHTML = "Estado";
+        botonCambiar_estado.onclick = function (e) {
+          $('#exampleModal').modal('show');
+          consultarClienteID(this.value);
+        }
+        botonCambiar_estado.className = "btn btn-primary cambiar_estado";
 
         celdaID_Cliente.innerText = result[i]["id_cliente"];
         celdaTipo_Identificacion.innerText = result[i]["tipo_identificacion"];
@@ -59,9 +77,10 @@ function listarClientes() {
         celdaCiudad.innerText = result[i]["ciudad"];
         celdaCorreo_Electronico.innerText = result[i]["correo_electronico"];
         celdaEstado.innerText = result[i]["estado"];
-        celdaAcciones.innerText = result[i]["acciones"];
 
-
+        celdaAcciones.appendChild(botonEditarCliente);
+        celdaAcciones.appendChild(botonEliminar);
+        celdaAcciones.appendChild(botonCambiar_estado);
 
         trResgistro.appendChild(celdaID_Cliente);
         trResgistro.appendChild(celdaTipo_Identificacion);
@@ -73,31 +92,17 @@ function listarClientes() {
         trResgistro.appendChild(celdaCiudad);
         trResgistro.appendChild(celdaCorreo_Electronico);
         trResgistro.appendChild(celdaEstado);
-        trResgistro.appendChild(celdaAcciones);
-
-
-
-        celdaOpcion.appendChild(botonEditarCliente);
-        trResgistro.appendChild(celdaOpcion)
-
+        trResgistro.appendChild(celdaAcciones); // Agregar la celda de "Acciones" a la fila
 
         cuerpoTabla.appendChild(trResgistro);
-
-
-        //creamos un td por cada campo de resgistro
-
       }
     },
     error: function (error) {
-      /*
-      ERROR: funcion que se ejecuta cuando la peticion tiene un error
-      */
       alert("Error en la petición " + error);
     }
-  })
+  });
 
   function consultarClienteID(id) {
-    //alert(id);
     $.ajax({
       url: url + id,
       type: "GET",
@@ -113,16 +118,12 @@ function listarClientes() {
         document.getElementById("correo_electronico").value = result["correo_electronico"];
         document.getElementById("estado").value = result["estado"];
         document.getElementById("acciones").value = result["acciones"];
-
       }
     });
   }
-
 }
 
 function validarCampos() {
-  // Obtener los valores de los campos
-  var tipo_identificacion = document.getElementById("tipo_identificacion").value;
   var identificacion = document.getElementById("identificacion").value;
   var nombre_cliente = document.getElementById("nombre_cliente").value;
   var apellido_cliente = document.getElementById("apellido_cliente").value;
@@ -132,12 +133,34 @@ function validarCampos() {
   var correo_electronico = document.getElementById("correo_electronico").value;
   var estado = document.getElementById("estado").value;
 
-  // Verificar si algún campo está vacío
-  if (tipo_identificacion === '' || identificacion === '' || nombre_cliente === '' || apellido_cliente === '' || telefono === '' || direccion === '' || ciudad === ''|| correo_electronico === ''  || estado === '') {
-    return false; // Al menos un campo está vacío
-  } else {
-    return true; // Todos los campos están llenos
+  var camposValidos = true;
+
+  if (!validarIdentificacion(identificacion)) {
+    camposValidos = false;
   }
+  if (!validarNombre(nombre_cliente)) {
+    camposValidos = false;
+  }
+  if (!validarApellido(apellido_cliente)) {
+    camposValidos = false;
+  }
+  if (!validarTelefono(telefono)) {
+    camposValidos = false;
+  }
+  if (!validarDireccion(direccion)) {
+    camposValidos = false;
+  }
+  if (!validarCiudad(ciudad)) {
+    camposValidos = false;
+  }
+  if (!validarCorreo(correo_electronico)) {
+    camposValidos = false;
+  }
+  if (!validarEstado(estado)) {
+    camposValidos = false;
+  }
+
+  return camposValidos;
 }
 
 function registrarClientes() {
@@ -157,7 +180,6 @@ function registrarClientes() {
 
   let camposValidos = true;
   let camposRequeridos = [
-    "tipo_identificacion",
     "identificacion",
     "nombre_cliente",
     "apellido_cliente",
@@ -203,7 +225,7 @@ function registrarClientes() {
     });
   }
 
-  function validarCampos() {
+  function identificacion() {
     var identificacion = document.getElementById("identificacion");
     return validarIdentificacion(identificacion);
   }
@@ -236,7 +258,7 @@ function registrarClientes() {
 
   //validarNombre
   function validarCampos() {
-    var nombre_cliente = document.getElementById("nombre_cliente");
+    var nombre_cliente = document.getElementById("Nombre_Cliente");
     return validarNombre_Cliente(nombre_cliente);
   }
   function validarNombre_Cliente(cuadroNumero) {
@@ -258,7 +280,7 @@ function registrarClientes() {
   }
   //ValidadApellido
   function validarCampos() {
-    var apellido_cliente = document.getElementById("apellido_cliente");
+    var apellido_cliente = document.getElementById("Apellido_Cliente");
     return validarApellido_Cliente(apellido_cliente);
   }
   function validarApellido_Cliente(cuadroNumero) {
@@ -282,7 +304,7 @@ function registrarClientes() {
 
   //ValidadTelefono
   function validarCampos() {
-    var telefono = document.getElementById("telefono");
+    var telefono = document.getElementById("Telefono");
     return validarTelefono(telefono);
   }
   function validarTelefono(cuadroNumero) {
@@ -305,7 +327,7 @@ function registrarClientes() {
   }
 
   function validarCampos() {
-    var direccion = document.getElementById("direccion");
+    var direccion = document.getElementById("Direccion");
     return validarDireccion(direccion);
   }
   function validarDireccion(cuadroNumero) {
@@ -328,7 +350,7 @@ function registrarClientes() {
   }
 
   function validarCampos() {
-    var ciudad = document.getElementById("ciudad");
+    var ciudad = document.getElementById("Ciudad");
     return validarCiudad(ciudad);
   }
   function validarCiudad(cuadroNumero) {
@@ -352,7 +374,7 @@ function registrarClientes() {
 
   //ValidadCorreo
   function validarCampos() {
-    var correo_electronico = document.getElementById("correo_electronico");
+    var correo_electronico = document.getElementById("Correo_Electronico");
     return validarCorreo_Electronico(correo_electronico);
   }
   function validarCorreo_Electronico(cuadroNumero) {
@@ -377,7 +399,7 @@ function registrarClientes() {
 
 
   function validarCampos() {
-    var estado = document.getElementById("estado");
+    var estado = document.getElementById("Estado");
     return validarEstado(estado);
   }
   function validarEstado(cuadroNumero) {
